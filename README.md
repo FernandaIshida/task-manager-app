@@ -22,3 +22,9 @@ Para instalar todas as bibliotecas necessárias, rode o comando abaixo:
 
 ```bash
 npm install @trpc/server @trpc/client @trpc/react-query @trpc/next zod @tanstack/react-query
+
+
+---
+## 📄 Commits
+
+📄 Veja também o [guia de commits convencionais](./commits.md) para manter um histórico limpo e organizado.
