@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { publicProcedure, router } from '@trpc/server'
+import { publicProcedure, router } from '../trpc'
 
 // Esquema de validação para task
 const taskSchema = z.object({
@@ -17,8 +17,20 @@ let tasks: {
 
 export const taskRouter = router({
     list: publicProcedure.query(() => {
-        return tasks
+        return tasks.sort((a, b) => b.dataCriacao.getTime() - a.dataCriacao.getTime())
     }),
+
+    getById: publicProcedure
+        .input(z.object({ id: z.string() }))
+        .query(({ input }) => {
+            const task = tasks.find((t) => t.id === input.id)
+
+            if (!task) {
+                throw new Error('Task não encontrada.')
+            }
+
+            return task
+        }),
 
     create: publicProcedure.input(taskSchema).mutation(({ input }) => {
         const newTask = {
