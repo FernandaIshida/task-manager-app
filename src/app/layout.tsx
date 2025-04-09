@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import './styles/globals.css';
 import { ReactNode } from 'react'
 import { TRPCProvider } from '@/components/Providers/TRPCProvider'
 import { Inter } from 'next/font/google'
+import { Toaster } from 'sonner'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: "Task Manager",
@@ -16,9 +17,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className={inter.variable}>
-      <body className="font-sans">
+    <html lang="pt-BR" className={inter.className}>
+      <body className="bg-red-100">
         <TRPCProvider>{children}</TRPCProvider>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   )
